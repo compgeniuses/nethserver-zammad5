@@ -1,0 +1,63 @@
+{
+if (($zammad{'status'} || 'disabled') eq 'enabled'){
+my $vhost = $zammad{VirtualHost} || 'zammad.'.$DomainName;
+
+$OUT .=<<"EOF";
+<VirtualHost *:80>
+    IncludeOptional conf.d/default-virtualhost.inc
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerName $vhost
+    RedirectMatch 301 ^(?!/\.well-known/acme-challenge/).* https://$vhost
+</VirtualHost>
+
+<VirtualHost *:443>
+    SSLEngine on
+    SSLProtocol all -SSLv2 -SSLv3
+    SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+
+    # CSRF token fix - thanks to CptCharlesG
+    RequestHeader set X_FORWARDED_PROTO 'https'
+    RequestHeader set X-Forwarded-Ssl on
+
+    # replace 'localhost' with your fqdn if you want to use zammad from remote
+    ServerName $vhost
+
+    ## don't loose time with IP address lookups
+    HostnameLookups Off
+
+    ## needed for named virtual hosts
+    UseCanonicalName Off
+
+    ## configures the footer on server-generated documents
+    ServerSignature Off
+
+    ProxyRequests Off
+    ProxyPreserveHost On
+
+    <Proxy 127.0.0.1:8080>
+      Require local
+    </Proxy>
+
+    ProxyPass /assets !
+    ProxyPass /favicon.ico !
+    ProxyPass /robots.txt !
+    ProxyPass /ws ws://127.0.0.1:6042/
+    ProxyPass / http://127.0.0.1:8080/
+
+</VirtualHost>
+EOF
+}
+else {
+    $OUT .=<<'EOF';
+
+# Zammad is disabled
+# You can enable it with
+# config setprop zammad status enabled
+# signal-event nethserver-zammad-update
+
+EOF
+}
+
+}
