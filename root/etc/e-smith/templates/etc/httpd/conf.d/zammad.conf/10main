@@ -8,8 +8,8 @@ $OUT .=<<"EOF";
 </VirtualHost>
 
 <VirtualHost *:80>
-    ServerName zammad.domain.local
-    RedirectMatch 301 ^(?!/.well-known/acme-challenge/).* https://zammad.domain.local
+    ServerName $vhost
+    RedirectMatch 301 ^(?!/.well-known/acme-challenge/).* https://vhost$
 </VirtualHost>
 
 <VirtualHost *:443>
@@ -22,7 +22,7 @@ $OUT .=<<"EOF";
     RequestHeader set X-Forwarded-Ssl on
 
     # replace 'localhost' with your fqdn if you want to use zammad from remote
-    ServerName zammad.domain.local
+    ServerName $vhost
 
     ## don't loose time with IP address lookups
     HostnameLookups Off
