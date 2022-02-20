@@ -1,6 +1,6 @@
-=================
-nethserver-zammad
-=================
+==================
+nethserver-zammad5
+==================
 
-Zammad 4 is a web-based, open source user support/ticketing solution.
-This is the last Zammad native install. Newer Zammad 5 is provided as docker installation.
+Zammad is a web-based, open source user support/ticketing solution.
+Zammad 5 is provided as docker installation.
