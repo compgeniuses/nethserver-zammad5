@@ -8,8 +8,8 @@ $OUT .=<<"EOF";
 </VirtualHost>
 
 <VirtualHost *:80>
-    ServerName $vhost
-    RedirectMatch 301 ^(?!/\.well-known/acme-challenge/).* https://$vhost
+    ServerName zammad.domain.local
+    RedirectMatch 301 ^(?!/.well-known/acme-challenge/).* https://zammad.domain.local
 </VirtualHost>
 
 <VirtualHost *:443>
@@ -22,7 +22,7 @@ $OUT .=<<"EOF";
     RequestHeader set X-Forwarded-Ssl on
 
     # replace 'localhost' with your fqdn if you want to use zammad from remote
-    ServerName $vhost
+    ServerName zammad.domain.local
 
     ## don't loose time with IP address lookups
     HostnameLookups Off
@@ -32,20 +32,11 @@ $OUT .=<<"EOF";
 
     ## configures the footer on server-generated documents
     ServerSignature Off
-
     ProxyRequests Off
     ProxyPreserveHost On
 
-    <Proxy 127.0.0.1:8080>
-      Require local
-    </Proxy>
-
-    ProxyPass /assets !
-    ProxyPass /favicon.ico !
-    ProxyPass /robots.txt !
-    ProxyPass /ws ws://127.0.0.1:6042/
-    ProxyPass / http://127.0.0.1:8080/
-
+    ProxyPass / http://localhost:8080/
+    ProxyPassReverse / http://localhost:8080/
 </VirtualHost>
 EOF
 }
