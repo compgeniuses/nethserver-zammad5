@@ -9,7 +9,7 @@ $OUT .=<<"EOF";
 
 <VirtualHost *:80>
     ServerName $vhost
-    RedirectMatch 301 ^(?!/.well-known/acme-challenge/).* https://vhost$
+    RedirectMatch 301 ^(?!/.well-known/acme-challenge/).* https://$vhost
 </VirtualHost>
 
 <VirtualHost *:443>
