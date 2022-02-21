@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -f /var/lib/nethserver/zammad/backup/zammad.sql ]; then
+if [ -f /var/lib/nethserver/zammad/zammad5.sql ]; then
     drop_sql=`mktemp`
     # drop all existing connections to the db and block new ones
     echo "UPDATE pg_database SET datallowconn = 'false' WHERE datname = 'zammad';" >> $drop_sql
