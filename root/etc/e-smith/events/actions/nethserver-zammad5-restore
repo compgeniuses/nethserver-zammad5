@@ -10,7 +10,7 @@ if [ -f /var/lib/nethserver/zammad/backup/zammad.sql ]; then
     echo "CREATE USER zammad; CREATE DATABASE zammad ENCODING 'UTF8' OWNER zammad TEMPLATE template0; GRANT ALL PRIVILEGES ON DATABASE zammad to zammad;" >> $drop_sql
     # allow new connections to db
     echo "UPDATE pg_database SET datallowconn = 'true' WHERE datname = 'zammad';" >> $drop_sql
-<
+
     docker exec zammad-docker-compose_zammad-postgresql_1 psql -U zammad zammad < $drop_sql
     docker exec zammad-docker-compose_zammad-postgresql_1 pg_dump -U zammad zammad < /var/lib/nethserver/zammad5/zammad5.sql
 
