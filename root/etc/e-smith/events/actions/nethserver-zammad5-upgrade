@@ -1,0 +1,5 @@
+cd /opt/zammad-docker-compose
+docker-compose stop
+git pull
+docker-compose pull
+docker-compose up -d

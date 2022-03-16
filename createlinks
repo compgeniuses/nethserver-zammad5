@@ -40,6 +40,12 @@ event_services($event,
     'httpd' => 'restart'
 );
 
+# zammad5 upgrade action
+
+$event = "nethserver-zammad5-upgrade";
+
+event_actions($event, 'nethserver-zammad5-upgrade' => 20);
+
 #--------------------------------------------------
 # actions for pre-backup-data event
 #--------------------------------------------------

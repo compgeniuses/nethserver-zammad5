@@ -27,6 +27,7 @@ if [[ $action == "app-info" ]]; then
         vhost=$(/sbin/e-smith/config getprop zammad VirtualHost)
         printf '{"url":"%s"}' "https://${vhost}"
     else
-        printf '{}'
+        vhost=zammad.$(/sbin/e-smith/config get DomainName)
+        printf '{"url":"%s"}' "https://${vhost}"
     fi
 fi
