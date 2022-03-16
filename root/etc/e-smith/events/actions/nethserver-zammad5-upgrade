@@ -3,3 +3,4 @@ docker-compose stop
 git pull
 docker-compose pull
 docker-compose up -d
+docker network connect aqua zammad-docker-compose_zammad-nginx_1
