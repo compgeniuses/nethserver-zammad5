@@ -36,7 +36,7 @@ cp -a ui/* %{buildroot}/usr/share/cockpit/%{name}/
 
 (cd root; find . -depth -print | cpio -dump %{buildroot})
 %{genfilelist} \
-  --dir /var/lib/nethserver/zammad5/backup 'attr(755, postgres, postgres)' \
+  --dir /var/lib/nethserver/zammad5/backup 'attr(755, root, root)' \
   --file /etc/sudoers.d/50_nsapi_nethserver_zammad5 'attr(0440,root,root)' \
   --file /usr/libexec/nethserver/api/%{name}/read 'attr(775,root,root)' \
 %{buildroot} > %{name}-%{version}-filelist
