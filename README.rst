@@ -8,8 +8,7 @@ Zammad 5 is provided as docker installation.
 Custom URLs
 ===========
 
-Just create a file like `/etc/httpd/conf.d/zammadcustom.conf` with following content. Replace example.org with the custom URL.
-
+Just create a file like `/etc/httpd/conf.d/zammadcustom.conf` with following content. Replace example.org with the custom URL.::
 
    <VirtualHost *:80>
        IncludeOptional conf.d/default-virtualhost.inc
@@ -55,3 +54,5 @@ Just create a file like `/etc/httpd/conf.d/zammadcustom.conf` with following con
        ProxyPass / http://localhost:8080/
        ProxyPassReverse / http://localhost:8080/
    </VirtualHost>
+
+You may use multiple files.
