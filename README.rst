@@ -5,10 +5,27 @@ nethserver-zammad5
 Zammad is a web-based, open source user support/ticketing solution.
 Zammad 5 is provided as docker installation.
 
+Virtualhost
+===========
+
+By default Zammad is reachable from zammad.domain.tld. To change it you need to set a custom virtualhost: ::
+
+   config setprop zammad VirtualHost my.custom.domain.tld
+   signal-event nethserver-zammad5-update
+   
+Upgrade
+=======
+
+To upgrade Zammad just execute following command: ::
+
+   signal-event nethserver-zammad5-upgrade
+
 Custom URLs
 ===========
 
-Just create a file like `/etc/httpd/conf.d/zammadcustom.conf` with following content. Replace example.org with the custom URL.::
+In Zammad it's possible to use a custom URL for the documentation.
+
+Just create a file like `/etc/httpd/conf.d/zammadcustom.conf` with following content. Replace example.org with the custom URL: ::
 
    <VirtualHost *:80>
        IncludeOptional conf.d/default-virtualhost.inc
