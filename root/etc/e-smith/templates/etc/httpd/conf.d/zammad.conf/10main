@@ -19,6 +19,10 @@ $OUT .=<<"EOF";
 
     ServerName $vhost
 
+    # CSRF token fix - thanks to CptCharlesG
+    RequestHeader set X_FORWARDED_PROTO 'https'
+    RequestHeader set X-Forwarded-Ssl on
+
     ## don't loose time with IP address lookups
     HostnameLookups Off
 
