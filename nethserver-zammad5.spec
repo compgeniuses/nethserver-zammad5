@@ -5,6 +5,7 @@ Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
 Source0: %{name}-%{version}.tar.gz
+%define composeVersion 2.5.0
 Source1: https://github.com/docker/compose/releases/download/v%{composeVersion}/docker-compose-linux-x86_64
 Source2: https://github.com/zammad/zammad-docker-compose/archive/refs/heads/master.zip
 BuildArch: noarch
