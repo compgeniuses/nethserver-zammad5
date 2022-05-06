@@ -34,7 +34,8 @@ event_actions($event,
     'nethserver-zammad5-conf' => '02' #must be executed before template expansion
 );
 event_templates($event, 
-    '/etc/httpd/conf.d/zammad.conf'
+    '/etc/httpd/conf.d/zammad.conf',
+    '/opt/zammad-docker-compose/docker-compose.override.yml'
 );
 event_services($event, 
     'httpd' => 'restart'

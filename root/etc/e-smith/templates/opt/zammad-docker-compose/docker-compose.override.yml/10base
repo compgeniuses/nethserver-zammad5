@@ -1,0 +1,5 @@
+version: '3'
+services:
+  zammad-nginx:
+    ports:
+      - "{$zammad{'TCPPort'}}:8080"

@@ -17,11 +17,6 @@ $OUT .=<<"EOF";
     SSLProtocol all -SSLv2 -SSLv3
     SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
 
-    # CSRF token fix - thanks to CptCharlesG
-    RequestHeader set X_FORWARDED_PROTO 'https'
-    RequestHeader set X-Forwarded-Ssl on
-
-    # replace 'localhost' with your fqdn if you want to use zammad from remote
     ServerName $vhost
 
     ## don't loose time with IP address lookups
@@ -35,8 +30,11 @@ $OUT .=<<"EOF";
     ProxyRequests Off
     ProxyPreserveHost On
 
-    ProxyPass / http://localhost:8080/
-    ProxyPassReverse / http://localhost:8080/
+    ProxyPass / http://localhost:$zammad{'TCPPort'}/
+    RewriteEngine on
+    RewriteCond %{HTTP:Upgrade} websocket [NC]
+    RewriteCond %{HTTP:Connection} upgrade [NC]
+    RewriteRule ^/?(.*) "ws://localhost:$zammad{'TCPPort'}/$1" [P,L]
 </VirtualHost>
 EOF
 }
