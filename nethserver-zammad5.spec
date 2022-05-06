@@ -58,7 +58,7 @@ unzip %SOURCE2 "zammad-docker-compose-master/*" -d "%{buildroot}/opt/zammad-dock
 %files -f %{name}-%{version}-filelist
 %defattr(-,root,root)
 %dir %{_nseventsdir}/%{name}-update
-%attr(0755,root,root) /opt/zabbix-docker/docker-compose
+%attr(0755,root,root) /opt/zammad-docker-compose/docker-compose
 %doc COPYING
 %dir %{_nseventsdir}/%{name}-update
 
