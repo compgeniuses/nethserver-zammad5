@@ -8,7 +8,7 @@ Source0: %{name}-%{version}.tar.gz
 %define composeVersion 2.5.0
 Source1: https://github.com/docker/compose/releases/download/v%{composeVersion}/docker-compose-linux-x86_64
 Source2: https://github.com/zammad/zammad-docker-compose/archive/refs/heads/master.zip
-BuildArch: noarch
+BuildArch: x86_64
 
 Requires: nethserver-docker, curl, git
 # nethserver-nginx, nethserver-postgresql, java-1.8.0-openjdk, elasticsearch, zammad
