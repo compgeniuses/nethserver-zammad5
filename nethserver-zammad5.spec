@@ -40,7 +40,7 @@ cp -a ui/* %{buildroot}/usr/share/cockpit/%{name}/
 mkdir -p %{buildroot}/opt/zammad-docker-compose
 mv %SOURCE1 %{buildroot}/opt/zammad-docker-compose/docker-compose
 
-unzip %SOURCE2 "zammad-docker-compose-master/*" -d "/opt/zammad-docker-compose"
+unzip %SOURCE2 "zammad-docker-compose-master/*" -d "%{buildroot}/opt/zammad-docker-compose"
 
 (cd root; find . -depth -print | cpio -dump %{buildroot})
 %{genfilelist} \
