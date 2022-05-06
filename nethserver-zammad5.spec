@@ -5,6 +5,8 @@ Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
 Source0: %{name}-%{version}.tar.gz
+Source1: https://github.com/docker/compose/releases/download/v%{composeVersion}/docker-compose-linux-x86_64
+Source2: https://github.com/zammad/zammad-docker-compose/archive/refs/heads/master.zip
 BuildArch: noarch
 
 Requires: nethserver-docker, curl, git
@@ -34,12 +36,19 @@ cp -a %{name}.json %{buildroot}/usr/share/cockpit/nethserver/applications/
 cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/
 cp -a ui/* %{buildroot}/usr/share/cockpit/%{name}/
 
+mkdir -p %{buildroot}/opt/zammad-docker-compose
+mv %SOURCE1 %{buildroot}/opt/zammad-docker-compose/docker-compose
+
+unzip %SOURCE2 "zammad-docker-compose-master/*" -d "/opt/zammad-docker-compose"
+
 (cd root; find . -depth -print | cpio -dump %{buildroot})
 %{genfilelist} \
-  --dir /var/lib/nethserver/zammad5/backup 'attr(755, root, root)' \
-  --file /etc/sudoers.d/50_nsapi_nethserver_zammad5 'attr(0440,root,root)' \
-  --file /usr/libexec/nethserver/api/%{name}/read 'attr(775,root,root)' \
 %{buildroot} > %{name}-%{version}-filelist
+
+#  --dir /var/lib/nethserver/zammad5/backup 'attr(755, root, root)' \
+#  --file /etc/sudoers.d/50_nsapi_nethserver_zammad5 'attr(0440,root,root)' \
+#  --file /usr/libexec/nethserver/api/%{name}/read 'attr(775,root,root)' \
+
 
 %post
 
@@ -47,6 +56,8 @@ cp -a ui/* %{buildroot}/usr/share/cockpit/%{name}/
 
 %files -f %{name}-%{version}-filelist
 %defattr(-,root,root)
+%dir %{_nseventsdir}/%{name}-update
+%attr(0755,root,root) /opt/zabbix-docker/docker-compose
 %doc COPYING
 %dir %{_nseventsdir}/%{name}-update
 
