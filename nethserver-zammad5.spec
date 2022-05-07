@@ -37,11 +37,11 @@ cp -a %{name}.json %{buildroot}/usr/share/cockpit/nethserver/applications/
 cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/
 cp -a ui/* %{buildroot}/usr/share/cockpit/%{name}/
 
-mkdir -p %{buildroot}/opt/zammad-docker-compose
-mv %SOURCE1 %{buildroot}/opt/zammad-docker-compose/docker-compose
-
+mkdir -p %{buildroot}/opt/
 unzip %SOURCE2 -d "%{buildroot}/opt/"
 mv %{buildroot}/opt/zammad-docker-compose-master %{buildroot}/opt/zammad-docker-compose
+
+mv %SOURCE1 %{buildroot}/opt/zammad-docker-compose/docker-compose
 
 (cd root; find . -depth -print | cpio -dump %{buildroot})
 %{genfilelist} \
