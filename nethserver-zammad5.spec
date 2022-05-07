@@ -41,7 +41,7 @@ mkdir -p %{buildroot}/opt/zammad-docker-compose
 mv %SOURCE1 %{buildroot}/opt/zammad-docker-compose/docker-compose
 
 unzip %SOURCE2 -d "%{buildroot}/opt/"
-mv %{buildroot}/opt/zammad-docker-compose-master %{buildroot}/opt/zammad-docker-compose/
+mv %{buildroot}/opt/zammad-docker-compose-master %{buildroot}/opt/zammad-docker-compose
 
 (cd root; find . -depth -print | cpio -dump %{buildroot})
 %{genfilelist} \
