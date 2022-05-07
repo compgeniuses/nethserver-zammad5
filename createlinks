@@ -31,7 +31,7 @@ my $event = "nethserver-zammad5-update";
 
 event_actions($event, 
     'initialize-default-databases' => '00',
-    'nethserver-zammad5-conf' => '02' #must be executed before template expansion
+    'nethserver-zammad5-conf' => '10'
 );
 event_templates($event, 
     '/etc/httpd/conf.d/zammad.conf',
