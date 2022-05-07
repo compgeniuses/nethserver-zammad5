@@ -5,4 +5,4 @@ sysctl -w vm.max_map_count=262144
 
 cd /opt/zammad-docker-compose
 ./docker-compose up -d
-docker network connect aqua zammad-docker-compose_zammad-nginx-1
+docker network connect aqua zammad-docker-compose-zammad-nginx-1
